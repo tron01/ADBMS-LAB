@@ -1,0 +1,35 @@
+create  table jobs(job_id INT,job_tit VARCHAR(255), min_sal INT ,max_sal INT );
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ JOB_ID                                             NUMBER(38)
+ JOB_TIT                                            VARCHAR2(255)
+ MIN_SAL                                            NUMBER(38)
+ MAX_SAL                                            NUMBER(38)
+
+create table employee(emp_id INT PRIMARY KEY ,f_name VARCHAR(255),l_name VARCHAR(255),email VARCHAR(255) ,phone INT);
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL NUMBER(38)
+ F_NAME                                             VARCHAR2(255)
+ L_NAME                                             VARCHAR2(255)
+ EMAIL                                              VARCHAR2(255)
+ PHONE                                              NUMBER(38)   
+
+
+
+
+department
+
+id
+name
+loc id
+
+
+locations
+id
+street adds
+postl code 
+city 
+county id

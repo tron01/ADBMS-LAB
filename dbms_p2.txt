@@ -1,0 +1,171 @@
+----------creating a user --------------------------------------- 
+
+create user username identified by password;
+ex-
+
+create user abhijith identified by pass;
+
+User created.
+
+--------Granting permission to a newly created User-------------------
+
+grant all privileges to username;
+ex-
+grant all privileges to abhijith;
+Grant succeeded.
+
+---------Creating tables with integrity constaints------------------
+
+create table studtent (sid int , sname varchar(20),age int);
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(38)
+ SNAME                                              VARCHAR2(20)
+ AGE                                                NUMBER(38)
+
+
+create table studtent1 (sid int primary key , sname varchar(20),age int);
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                       NOT NULL NUMBER(38)
+ SNAME                                              VARCHAR2(20)
+ AGE                                                NUMBER(38)
+
+
+create table student2 (sid int  , sname varchar(20),age int ,primary key(sid));
+
+Name                                      Null?    Type
+----------------------------------------- -------- ----------------------------
+SID                                       NOT NULL NUMBER(38)
+SNAME                                              VARCHAR2(20)
+AGE                                                NUMBER(38)
+
+
+
+-----------Seting foreign key --------
+
+create table course (sid int references student2,course_id varchar(20),marks int);
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(38)
+ COURSE_ID                                          VARCHAR2(20)
+ MARKS                                              NUMBER(38)
+
+create table course1 (sid int ,course_id varchar(20),marks int ,foreign key (sid) references student2(sid));
+
+Name                                      Null?    Type
+----------------------------------------- -------- ----------------------------
+SID                                                NUMBER(38)
+COURSE_ID                                          VARCHAR2(20)
+MARKS                                              NUMBER(38)
+
+
+------------------------inserting records into table -----------------------------
+
+insert into tablename (value1 ,value2 ...,value_n);
+
+insert into student2  values (3,'abid',24);
+1 row created. 
+
+-------------to view content of the table ----------------------
+
+select * from student2;
+
+
+       SID SNAME                       AGE
+---------- -------------------- ----------
+         3 abid                         24
+
+ insert into student2  values (4,'abid',24); 
+1 row created.
+
+
+select * from student2;
+
+       SID SNAME                       AGE
+---------- -------------------- ----------
+         3 abid                         24
+         4 abid                         24
+
+
+insert into course values (3,'20mca014',100);
+
+1 row created
+
+ select * from course;
+
+
+       SID COURSE_ID                 MARKS
+---------- -------------------- ----------
+         3 20mca014                    100
+
+
+
+insert into studtent values ('Amal',5,30);
+
+0r
+ --------------alternate insert method--------------------
+
+
+insert into tablename (fieldname1,filedname2....) values (value1,value2.....);
+
+insert into student2 (sname,sid,age) values ('aljo',6,33);
+
+
+      SID SNAME                       AGE
+--------- -------------------- ----------
+        3 abid                         24
+        4 abid                         24
+        6 aljo                         33
+
+
+
+insert into student2 (sname,sid,age) values ('ajeesh',7,23);
+
+       SID SNAME                       AGE
+---------- -------------------- ----------
+         3 abid                         24
+         4 abid                         24
+         6 aljo                         33
+         7 ajeesh                       23
+
+insert into student2 (sid,sname) values (125 ,'devika');
+
+
+       SID SNAME                       AGE
+---------- -------------------- ----------
+         3 abid                         24
+         4 abid                         24
+         6 aljo                         33
+         7 ajeesh                       23
+       125 devika
+
+insert into student2 values  (&sid,'&sname',&age);
+
+SQL> commit;
+
+Commit complete.SQL> commit;
+
+Commit complete.
+
+ create table jobs (job_id int,job_title varchar(20),min_salary int ,max_salary int,primary key (job_id))
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ JOB_ID                                    NOT NULL NUMBER(38)
+ JOB_TITLE                                          VARCHAR2(20)
+ MIN_SALARY                                         NUMBER(38)
+ MAX_SALARY                                         NUMBER(38)
+
+create table regions (region_id int ,region_name varchar(50),primary key (region_id));
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGION_ID                                 NOT NULL NUMBER(38)
+ REGION_NAME                                        VARCHAR2(50)
+
+
+create table country (country _id int ,country _name varchar(50),primary key (country_id) ,foreign key (sid) references student2(sid));
