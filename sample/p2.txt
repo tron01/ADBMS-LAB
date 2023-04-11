@@ -185,3 +185,19 @@ select * from sailors order by sname desc;
        29 Brutus                                          1 33
        95 Art                                             3 25.5
        32 Andy                                            8 25.5
+
+
+select * from sailors order by rating desc;
+
+      SID SNAME                                      RATING AGE
+--------- -------------------------------------- ---------- ---------------------------------------
+       58 Rusty                                          10 35
+       71 Zorba                                          10 16
+       74 Horataio                                        9 35
+       31 Lubber                                          8 55.5
+       32 Andy                                            8 25.5
+       64 Horataio                                        7 35
+       22 Dustin                                          7 45
+       95 Art                                             3 25.5
+       85 bob                                             3 63.5
+       29 Brutus                                          1 33
