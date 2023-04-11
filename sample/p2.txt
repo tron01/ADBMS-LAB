@@ -1,0 +1,187 @@
+create table sailors (sid int primary key, sname varchar(38),rating int,age long);
+
+Table created.
+
+SQL> desc sailors
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                       NOT NULL NUMBER(38)
+ SNAME                                              VARCHAR2(38)
+ RATING                                             NUMBER(38)
+ AGE                                                LONG
+
+create table boats(bid int primary key, bname varchar(38),color varchar(28));
+
+
+Table created.
+
+SQL> desc boats
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BID                                       NOT NULL NUMBER(38)
+ BNAME                                              VARCHAR2(38)
+ COLOR                                              VARCHAR2(28)
+
+create table  reserves (sid int ,bid int references boats(bid),sid int references sailors(sid));
+
+
+
+
+Table created.
+
+SQL> desc reserves
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                       NOT NULL NUMBER(38)
+ BID                                                NUMBER(38)
+
+insert into sailors values(&sid,'&sname',&rating,&age);
+insert into reserves values(&bid,'&bname','&color');
+
+select * from sailors;
+set linesize 250;
+
+   SID SNAME                                      RATING AGE
+------ -------------------------------------- ---------- ---------------------------------------
+    22 Dustin                                          7 45
+    29 Brutus                                          1 33
+    31 lubber                                          8 55.5
+    32 Andy                                            8 25.5
+    58 Rusty                                          10 35
+    64 Horataio                                        7 35
+    71 Zorba                                          10 16
+    74 Horataio                                        9 35
+    85 Art                                             3 25.5
+    95 Bob                                             3 63.5
+
+insert into boats values(&bid,'&bname','&color');
+
+
+SQL> select * from boats;
+
+       BID BNAME                                  COLOR
+---------- -------------------------------------- ----------------------------
+       101 Interlake                              blue
+       102 Interlake                              red
+       103 Clipper                                green
+       104 Marine                                 red
+
+
+alter table  reserves  add day date;
+
+Table altered.
+
+
+SQL> desc reserves;
+ Name                                                                                                 Null?    Type
+ --------------------------------------------------------------------------------------------------------------------
+ SID                                                                                                  NOT NULL NUMBER(38)
+ BID                                                                                                  NUMBER(38)
+ DAY                                                                                                  DATE
+
+insert into reserves values(&sid,&bid,'&date');
+
+
+create table  reserves (sid int references sailors(sid),bid int references boats(bid),day date );
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(38)
+ BID                                                NUMBER(38)
+ DAY                                                DATE
+
+
+select * from  reserves;
+
+  SID        BID DAY
+----- ---------- ---------
+   22        101 10-OCT-98
+   22        102 10-OCT-98
+   22        103 08-OCT-98
+   22        104 07-OCT-98
+   31        102 10-NOV-98
+   31        103 06-NOV-98
+   31        104 12-NOV-98
+   64        101 05-SEP-98
+   64        102 08-SEP-98
+   74        103 08-SEP-98
+
+select distinct  s.sname from sailors s ,reserves r1,reserves r2 where s.sid=r1.sid and s.sid=r2.sid and r1.bid!=r2.bid;
+
+
+SNAME
+--------------------------------------
+Lubber
+Dustin
+Horataio
+
+
+
+select count(sid) from sailors;
+
+
+COUNT(SID)
+----------
+        10
+
+
+select count(distinct bid) from reserves;
+
+
+COUNT(DISTINCTBID)
+------------------
+                 4
+
+select count(bid) from boats;
+
+COUNT(BID)
+----------
+         4
+
+
+select sum(rating) from sailors;
+
+SUM(RATING)
+-----------
+         66
+
+
+select sum(distinct age) from sailors;
+
+
+select avg(distinct age)from sailors;
+
+select max(distinct age)from sailors;
+
+select min(distinct age)from sailors;
+
+
+
+select * from sailors order by sname;
+     SID SNAME                                      RATING AGE
+-------- -------------------------------------- ---------- ------------------
+      32 Andy                                            8 25.5
+      95 Art                                             3 25.5
+      29 Brutus                                          1 33
+      22 Dustin                                          7 45
+      64 Horataio                                        7 35
+      74 Horataio                                        9 35
+      31 Lubber                                          8 55.5
+      58 Rusty                                          10 35
+      71 Zorba                                          10 16
+      85 bob                                             3 63.5
+
+select * from sailors order by sname desc;
+
+      SID SNAME                                      RATING AGE
+--------- -------------------------------------- ---------- ---------------------------------------
+       85 bob                                             3 63.5
+       71 Zorba                                          10 16
+       58 Rusty                                          10 35
+       31 Lubber                                          8 55.5
+       64 Horataio                                        7 35
+       74 Horataio                                        9 35
+       22 Dustin                                          7 45
+       29 Brutus                                          1 33
+       95 Art                                             3 25.5
+       32 Andy                                            8 25.5

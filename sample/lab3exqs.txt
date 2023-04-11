@@ -1,0 +1,92 @@
+Data Manipulation Language (DCL) Commands:
+Show all records of Sailors
+Show all records of Boats
+Show all records of Reserves
+Find the names and ages of all sailors.
+Find all sailors with a rating above 8.
+Find sailors name with a rating above 7 &amp; age above 25.
+Display all the names &amp; colors of the boats.
+Find all the boats with Red color.
+Find the names of sailors who have reserved boat number 103.
+Find the names of sailors &#39; who have reserved Red boat.
+Find the colors of boats reserved by Lubber.
+Find names of the sailors who have reserved at least one boat.
+Find names of the sailors who have reserved two different boats.
+
+AGGREGATE Functions :- In addition to simply retrieving data, we often want
+to perform some computation or summarization. We now consider a powerful class
+of constructs for computing aggregate values such as MIN and SUM. These
+features represent a significant extension of relational algebra. SQL supports five
+aggregate operations, which can be applied on any column, say A, of a relation:
+
+1. COUNT (A) :- The number of values in the A column.
+Or COUNT (DISTINCT A): The number of unique values in the A column.
+
+Ex:- 1) To count number SIDs of sailors in Sailors table
+2) To count numbers of boats booked in Reserves table.
+3) To count number of Boats in Boats table.
+2. SUM (A) :- The sum of all values in the A column.
+Or SUM (DISTINCT A): The sum of all unique values in the A column.
+Ex:- 1) To find sum of rating from Sailors
+2) To find sum of distinct age of Sailors (Duplicate ages are eliminated).
+3. AVG (A) :- The average of all values in the A column.
+Or AVG (DISTINCT A): The average of all unique values in the A column. Ex:-
+2) To find average of distinct age of Sailors (Duplicate ages are eliminated).
+
+4. MAX (A) :- The maximum value in the A column.
+Ex:- To find age of Oldest Sailor.
+
+5. MIN (A) :- The minimum value in the A column. Ex:- To find age of Youngest
+Sailor.
+Note that it does not make sense to specify DISTINCT in conjunction with MIN or
+MAX (although SQL does not preclude this).
+
+1) Find the average age of sailors with a rating of 10.
+2) Count the number of different sailor names.
+3) Find the name and age of the oldest sailor.
+4) Count the number of Sailors.
+5) Find the names of sailors who are older than the oldest sailor with a rating of 10.
+
+ORDER BY Clause :- The ORDER BY keyword is used to sort the result-set by a
+specified column. The ORDER BY keyword sorts the records in ascending order
+
+by default (we can even use ASC keyword). If we want to sort the records in a
+descending order, we can use the DESC keyword. The general syntax is
+SELECT ATT_LIST FROM TABLE_LIST ORDER BY ATT_NAMES [ASC |
+DESC];
+
+Ex:- 1) Display all the sailors according to their ages
+2) Display all the sailors according to their ratings (topper first).
+3) Displays all the sailors according to rating, if rating is same then sort according
+to age.
+4) Displays all the sailors according to rating (Lower Rating First), if rating is
+same then sort according to age (Younger First). Query :
+
+Output :
+
+GROUP BY and HAVING Clauses :- Thus far, we have applied aggregate
+operations to all (qualifying) rows in a relation. Often we want to apply aggregate
+operations to each of a number of groups of rows in a relation, where the number
+of groups depends on the relation instance. For this purpose we can use Group by
+clause.
+
+GROUP BY:- Group by is used to make each a number of groups of rows in a
+relation, where the number of groups depends on the relation instances. The
+general syntax is
+SELECT [DISTINCT] ATT_LIST FROM TABLE_LIST WHERE CONDITION
+GROUP BY GROUPING_LIST;
+
+Ex:- Find the age of the youngest sailor for each rating level.
+
+HAVING :- The extension of GROUP BY is HAVING clause which can be used
+to specify the qualification over group. The general syntax is
+SELECT [DISTINCT] ATT_LIST FROM TABLE_LIST WHERE CONDITION
+GROUP BY GROUPING_LIST HAVING GROUP_CONDITIION;
+
+Write following queries in SQL.
+1) For each red boat; find the number of reservations for this boat.
+
+2) Find the average age of sailors for each rating level that has at least two sailors.
+
+3) Find those ratings for which the average age of sailors is the minimum overall
+ratings.
