@@ -298,3 +298,11 @@ RESERVES
 SAILORS
 
 
+select b.color from boats b,reserves  r,sailors s where s.sname ='Lubber' AND s.sid =r.sid AND b.bid =r.bid;
+
+
+COLOR
+----------------------------
+red
+green
+red
