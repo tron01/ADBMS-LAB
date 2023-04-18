@@ -201,3 +201,28 @@ select * from sailors order by rating desc;
        95 Art                                             3 25.5
        85 bob                                             3 63.5
        29 Brutus                                          1 33
+
+select sname,age from sailors;
+
+
+SNAME                                  AGE
+-------------------------------------- -------------------------------------------------------------
+Dustin                                 45
+Brutus                                 33
+Lubber                                 55.5
+Andy                                   25.5
+Rusty                                  35
+Horataio                               35
+Zorba                                  16
+Horataio                               35
+bob                                    63.5
+Art                                    25.5
+
+select sname,rating from sailors where rating >8;
+
+
+SNAME                                      RATING
+-------------------------------------- ----------
+Rusty                                          10
+Zorba                                          10
+Horataio                                        9
