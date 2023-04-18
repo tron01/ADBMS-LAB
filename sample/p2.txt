@@ -226,3 +226,75 @@ SNAME                                      RATING
 Rusty                                          10
 Zorba                                          10
 Horataio                                        9
+
+select sname,rating,age from sailors where rating >7 AND age>25 ;
+
+
+select bname,color from boats;
+
+
+BNAME                                  COLOR
+-------------------------------------- ----------------------------
+Interlake                              blue
+Interlake                              red
+Clipper                                green
+Marine                                 red
+
+
+select bname,color from boats where color='red';
+
+BNAME                                  COLOR
+-------------------------------------- ----------------------------
+Interlake                              red
+Marine                                 red
+
+
+
+select   s.sname from sailors s ,reserves r where s.sid=r.sid AND  r.bid=103; 
+
+
+SNAME
+--------------------------------------
+Dustin
+Lubber
+Horataio
+
+
+select   s.sname from sailors s ,reserves r ,boats b where b.bid=r.bid AND  s.sid=r.sid    AND b.color='red' ; 
+
+
+SNAME
+--------------------------------------
+Dustin
+Dustin
+Lubber
+Lubber
+Horataio
+
+select b.bname from boats b,reserves  r,sailors s where s.sname ='Lubber' AND s.sid =r.sid AND b.bid =r.bid;
+
+BNAME
+--------------------------------------
+Interlake
+Clipper
+Marine
+
+
+//To see tables created.
+
+SQL> select table_name from user_tables;
+
+TABLE_NAME
+------------------------------
+STUDTENT
+STUDTENT1
+STUDENT2
+COURSE
+COURSE1
+JOBS
+REGIONS
+BOATS
+RESERVES
+SAILORS
+
+
