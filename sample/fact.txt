@@ -1,0 +1,11 @@
+DECLARE 
+  fac number :=1;
+  n number(11);
+BEGIN
+   n :=&n;
+   while n >0 loop
+    fac :=n*fac;
+    n :=n-1;
+   end loop;
+  dbms_output.put_line('factorial='||fac); 
+END; 
