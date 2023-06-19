@@ -1,0 +1,71 @@
+create or replace function fun(a number) 
+return number is
+begin
+return (a*a);
+end fun;
+/
+
+Function created.
+
+
+select fun(2);
+
+ select sysdate from dual;
+
+
+SYSDATE
+---------
+19-JUN-23
+
+
+create function  s1(a number,b number)
+return number is
+begin
+return (a * b);
+end s1;
+/
+
+select s1(10,2) from dual;
+
+ S1(10,2)
+---------
+       20
+
+
+create function  s2(a number,b number)
+return number is
+begin
+return (a + b);
+end s2;
+/
+
+select s2(2,2) from dual;
+
+  S2(2,2)
+---------
+        4
+
+
+declare
+a number;
+b number;
+c number;
+begin
+
+a :=&a;
+b :=&b;
+c :=s2(a,b);
+dbms_output.put_line('sum ='||c);
+end;
+/
+
+Enter value for a: 10
+old   7: a :=&a;
+new   7: a :=10;
+Enter value for b: 10
+old   8: b :=&b;
+new   8: b :=10;
+sum =20
+
+
+
