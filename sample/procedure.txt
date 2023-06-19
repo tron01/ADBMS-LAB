@@ -1,0 +1,9 @@
+create  procedure myprocc is
+begin
+dbms_output.put_line('hello abid');
+end;
+/
+
+begin 
+myprocc(); 
+end;
