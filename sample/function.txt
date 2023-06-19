@@ -69,3 +69,42 @@ sum =20
 
 
 
+
+create or replace function rate(id number) return number is
+r number;
+begin
+select rating into r from sailors where sid=id;
+return(r);
+end rate;
+
+Function created.
+
+declare 
+id number;
+r number;
+begin
+id:=&id;
+r:=rate(id);
+dbms_output.put_line('Result:'||r);
+end;
+
+Enter value for id: 22
+old   5: id:=&id;
+new   5: id:=22;
+Result:7
+
+
+ select * from sailors;
+
+   SID SNAME                                      RATING AGE
+------ -------------------------------------- ---------- -----------------------
+    22 Dustin                                          7 45
+    29 Brutus                                          1 33
+    31 Lubber                                          8 55.5
+
+
+
+ 
+
+
+
