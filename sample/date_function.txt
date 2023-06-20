@@ -1,0 +1,41 @@
+create or replace function mdate(n number) return varchar is
+begin 
+if(n=1) then
+return('Sunday');
+elsif(n=2) then
+return('monday');
+elsif(n=3) then
+return('tuesday');
+elsif(n=4) then
+return('wedesday');
+elsif(n=5)then
+return('thursday');
+elsif(n=6)then
+return('friday');
+elsif(n=7)then
+return('saturday');
+end if;
+end mdate;
+
+
+ select mdate(5) from dual
+
+
+SQL>  select mdate(5) from dual;
+
+MDATE(5)
+--------------------------------------------------------------------------------
+thursday
+
+delcare
+b number;
+d varchar(12);
+begin
+b:=&b;
+d:=mdate(b);
+dbms_output.put_line('day is='||d);
+end;
+/
+
+
+
