@@ -27,7 +27,8 @@ MDATE(5)
 --------------------------------------------------------------------------------
 thursday
 
-delcare
+
+declare
 b number;
 d varchar(12);
 begin
@@ -36,6 +37,13 @@ d:=mdate(b);
 dbms_output.put_line('day is='||d);
 end;
 /
+
+Enter value for b: 4
+old   5: b:=&b;
+new   5: b:=4;
+day is=wedesday
+
+PL/SQL procedure successfully completed.
 
 
 
