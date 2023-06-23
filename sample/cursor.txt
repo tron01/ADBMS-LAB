@@ -1,0 +1,100 @@
+
+
+
+select * from sailors;
+
+
+       SID SNAME                                      RATING AGE
+---------- -------------------------------------- ---------- ---------------------------------------
+        22 Dustin                                          7 45
+        29 Brutus                                          1 33
+        31 Lubber                                          8 55.5
+        32 Andy                                            8 25.5
+        58 Rusty                                          10 35
+        64 Horataio                                        7 35
+        71 Zorba                                          10 16
+        74 Horataio                                        9 35
+        85 bob                                             3 63.5
+        95 Art                                             3 25.5
+
+
+
+
+DECLARE
+n number(5);
+BEGIN
+UPDATE sailors SET rating =rating +1 ;
+IF SQL%NOTFOUND THEN
+dbms_output.put_line('No sal are updated');
+ELSIF SQL%FOUND THEN
+n := SQL%ROWCOUNT;
+dbms_output.put_line('Sal for ' ||n || 'employees are
+updated');
+END IF;
+END;
+/
+
+
+      SID SNAME                                      RATING AGE
+--------- -------------------------------------- ---------- ---------------------------------------
+       22 Dustin                                          8 45
+       29 Brutus                                          2 33
+       31 Lubber                                          9 55.5
+       32 Andy                                            9 25.5
+       58 Rusty                                          11 35
+       64 Horataio                                        8 35
+       71 Zorba                                          11 16
+       74 Horataio                                       10 35
+       85 bob                                             4 63.5
+       95 Art                                             4 25.5
+
+
+SQL> savepoint s1;
+
+Savepoint created.
+
+
+update sailors set rating=10 where sid=22;
+
+1 row updated.
+
+SQL> select * from sailors;
+
+       SID SNAME                                      RATING AGE
+---------- -------------------------------------- ---------- ---------------------------------------
+        22 Dustin                                         10 45
+        29 Brutus                                          1 33
+        31 Lubber                                          8 55.5
+        32 Andy                                            8 25.5
+        58 Rusty                                          10 35
+        64 Horataio                                        7 35
+        71 Zorba                                          10 16
+        74 Horataio                                        9 35
+        85 bob                                             3 63.5
+        95 Art                                             3 25.5
+
+10 rows selected.
+
+SQL> rollback to s1;
+
+Rollback complete.
+
+
+SQL> select * from sailors;
+
+       SID SNAME                                      RATING AGE
+---------- -------------------------------------- ---------- ---------------------------------------
+        22 Dustin                                          7 45
+        29 Brutus                                          1 33
+        31 Lubber                                          8 55.5
+        32 Andy                                            8 25.5
+        58 Rusty                                          10 35
+        64 Horataio                                        7 35
+        71 Zorba                                          10 16
+        74 Horataio                                        9 35
+        85 bob                                             3 63.5
+        95 Art                                             3 25.5
+
+10 rows selected.
+
+

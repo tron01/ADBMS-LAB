@@ -1,0 +1,9 @@
+create  procedure bank is
+begin
+dbms_output.put_line('');
+end;
+/
+
+begin 
+myprocc(); 
+end;
