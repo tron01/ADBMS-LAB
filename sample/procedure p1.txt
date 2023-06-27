@@ -1,0 +1,118 @@
+create table account(acno number,name varchar(20),amount number);
+
+Table created.
+insert into account values(&acno,'&name',&amount);
+
+1 row created.
+1 row created.
+
+
+SQL> select * from account;
+
+      ACNO NAME                     AMOUNT
+---------- -------------------- ----------
+       101 abid                     200000
+       100 abhi                     500000
+
+
+ create or replace procedure deposit(ac number,bal number) is
+  2  begin
+  3  update account set amount=amount+bal where acno=ac;
+  4  end;
+  5  /
+
+Procedure created.
+
+
+ create or replace procedure withdraw(ac number,bal number) is
+  2  begin
+  3  update account set amount=amount-bal where acno=ac;
+  4  end;
+  5  /
+
+Procedure created.
+
+ create or replace procedure display is
+ cursor c is select * from account;
+ begin
+ for i in c
+ loop
+ dbms_output.put_line(i.acno||' '||i.name||' '||i.amount);
+ end loop;
+ end;
+ /
+
+Procedure created.
+
+declare
+ac number;
+am number;
+ch number;
+begin
+ac:=&acno;
+am:=&amount;
+ch:=&ch;
+if ch=1
+	then
+	deposit(ac,am);
+elsif ch=2
+	then
+	withdraw(ac,am);
+elsif ch=3
+	then
+	display();
+end if;
+end;
+/
+
+
+Enter value for acno: 101
+old   6: ac:=&acno;
+new   6: ac:=101;
+Enter value for amount: 20000
+old   7: am:=&amount;
+new   7: am:=20000;
+Enter value for ch: 1
+old   8: ch:=&ch;
+new   8: ch:=1;
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO NAME                     AMOUNT
+---------- -------------------- ----------
+       101 abid                     220000
+       100 abhi                     500000
+
+Enter value for acno: 100
+old   6: ac:=&acno;
+new   6: ac:=100;
+Enter value for amount: 11111
+old   7: am:=&amount;
+new   7: am:=11111;
+Enter value for ch: 2
+old   8: ch:=&ch;
+new   8: ch:=2;
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO NAME                     AMOUNT
+---------- -------------------- ----------
+       101 abid                     220000
+       100 abhi                     488889
+
+Enter value for acno: 101
+old   6: ac:=&acno;
+new   6: ac:=101;
+Enter value for amount: 20
+old   7: am:=&amount;
+new   7: am:=20;
+Enter value for ch: 3
+old   8: ch:=&ch;
+new   8: ch:=3;
+
+101 abid 220000
+100 abhi 488889
