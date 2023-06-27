@@ -54,7 +54,7 @@ SQL> savepoint s1;
 Savepoint created.
 
 
-update sailors set rating=10 where sid=22;
+SQL> update sailors set rating=10 where sid=22;
 
 1 row updated.
 

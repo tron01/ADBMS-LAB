@@ -1,0 +1,27 @@
+declare
+cursor c2 is
+select sid,rating from sailors;
+a c2%rowtype;
+begin
+open c2;
+dbms_output.put_line('sid' ||'  ' ||'rating' );
+loop
+fetch  c2 into a; 
+exit when c2%notfound;
+dbms_output.put_line( a.sid ||' '|| a.rating);
+end loop;
+close c2;
+end;
+
+
+sid  rating
+22 7
+29 1
+31 8
+32 8
+58 10
+64 7
+71 10
+74 9
+85 3
+95 3
