@@ -1,0 +1,62 @@
+ create table product(pid int primary key,pname varchar(20),price int);
+
+Table created.
+
+insert into product values(&pid,'&pname',&price);
+1 row created.
+1 row created.
+1 row created.
+
+
+select * from product;
+
+       PID PNAME                     PRICE
+---------- -------------------- ----------
+        11 bag                         200
+        12 dress                       240
+        13 pot                          20
+
+create or replace procedure record(pi number,pr number) is
+ex exception;
+begin
+update product set price=price+pr where pid=pi;
+if sql%notfound then
+raise ex;
+end if;
+exception
+when ex then
+dbms_output.put_line('product id invalid');
+end;
+/
+
+Procedure created.
+
+
+declare
+pid int:=&pid;
+price int:=&price;
+begin
+record(pid,price);
+end;
+/
+
+
+
+Enter value for pid: 11
+old   2: pid int:=&pid;
+new   2: pid int:=11;
+Enter value for price: 300
+old   3: price int:=&price;
+new   3: price int:=300;
+
+PL/SQL procedure successfully completed.
+
+
+ select * from product;
+
+       PID PNAME                     PRICE
+---------- -------------------- ----------
+        11 bag                         500
+        12 dress                       240
+        13 pot                          20
+
