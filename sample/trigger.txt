@@ -30,3 +30,44 @@ ERROR at line 1:
 ORA-20004: Violation of Minimum Professor Salary
 ORA-06512: at "ABHIJITH.MINSALARY", line 3
 ORA-04088: error during execution of trigger 'ABHIJITH.MINSALARY'
+
+
+------------------------------------------------------------
+
+create table professor_backlog as select * from professor ;
+
+Table created.
+
+
+
+create or replace trigger t1 after delete on  professor 
+for each row
+begin 
+insert into professor_backlog values(:old.pid,:old.pname,:old.salary);
+end;
+/
+
+Trigger created.
+
+
+
+SQL> select * from  professor ;
+
+       PID PNAME                    SALARY
+---------- -------------------- ----------
+        12 abid                  300000000
+
+
+delete from professor_backlog;
+
+1 row deleted.
+
+SQL> delete from professor where pid=12;
+
+1 row deleted.
+
+SQL> select * from professor_backlog;
+
+       PID PNAME                    SALARY
+---------- -------------------- ----------
+        12 abid                  300000000
