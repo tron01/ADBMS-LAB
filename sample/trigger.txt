@@ -71,3 +71,35 @@ SQL> select * from professor_backlog;
        PID PNAME                    SALARY
 ---------- -------------------- ----------
         12 abid                  300000000
+
+
+create table goldrate (price int ,rdate date);
+
+
+SQL> insert into goldrate values(2000,sysdate);
+
+1 row created.
+
+SQL> select * from goldrate;
+
+     PRICE RDATE
+---------- ---------
+      2000 07-JUL-23
+
+
+create table goldrate_backlog as select * from goldrate;
+
+
+Table created.
+
+
+
+create or replace trigger t2 after update on  goldrate
+for each row
+begin 
+insert into goldrate_backlog values(:old.price,:old.rdate);
+end;
+/
+
+Trigger created.
+
