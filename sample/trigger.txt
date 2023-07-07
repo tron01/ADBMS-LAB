@@ -1,0 +1,32 @@
+
+create table professor(pid int primary key,pname varchar(20),salary int);
+
+Table created.
+
+create or replace trigger minSalary before 
+insert on professor
+for each row
+begin
+	if (:new.salary < 60000 ) 
+	  then RAISE_APPLICATION_ERROR
+	 (-20004 , 'Violation of Minimum Professor Salary ');
+	end if;
+end;
+
+Trigger created.
+
+
+insert into professor values (&pid,'&pname',&salary);
+
+insert into professor values (&pid,'&pname',&salary);
+Enter value for pid: 23
+Enter value for pname: dfg
+Enter value for salary: 6
+old   1: insert into professor values (&pid,'&pname',&salary)
+new   1: insert into professor values (23,'dfg',6)
+insert into professor values (23,'dfg',6)
+            *
+ERROR at line 1:
+ORA-20004: Violation of Minimum Professor Salary
+ORA-06512: at "ABHIJITH.MINSALARY", line 3
+ORA-04088: error during execution of trigger 'ABHIJITH.MINSALARY'
