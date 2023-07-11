@@ -73,33 +73,78 @@ SQL> select * from professor_backlog;
         12 abid                  300000000
 
 
-create table goldrate (price int ,rdate date);
+Q)gold rate update question.
 
 
-SQL> insert into goldrate values(2000,sysdate);
-
-1 row created.
-
-SQL> select * from goldrate;
-
-     PRICE RDATE
----------- ---------
-      2000 07-JUL-23
 
 
-create table goldrate_backlog as select * from goldrate;
-
+create table gold (bdate date,price int);
 
 Table created.
 
+create table gold_history(new_date date,new_price int,old_price int);
+
+Table created.
+
+insert into gold values('7-jul-23',45000);
+
+1 row created.
 
 
-create or replace trigger t2 after update on  goldrate
+create or replace trigger t4 after update on gold
 for each row
-begin 
-insert into goldrate_backlog values(:old.price,:old.rdate);
+begin
+	insert into gold_history values(:new.bdate,:new.price,:old.price);
 end;
 /
 
 Trigger created.
+
+update gold set price=&price where bdate ='7-jul-23';
+
+Enter value for price: 610000
+old   1: update gold set price=&price where bdate ='7-jul-23'
+new   1: update gold set price=610000 where bdate ='7-jul-23'
+
+
+SQL> select * from gold;
+
+BDATE          PRICE
+--------- ----------
+07-JUL-23     610000
+
+
+select * from gold_history;
+
+
+
+NEW_DATE   NEW_PRICE  OLD_PRICE
+--------- ---------- ----------
+07-JUL-23     610000      60000
+
+
+
+
+Q)write a Trigger to restrict deletion from professor table.
+
+
+
+create or replace trigger t3 before delete on professor 
+for each row
+begin
+	RAISE_APPLICATION_ERROR(-20006,'deletion is not possible');
+end;
+/
+
+Trigger created.
+
+delete from professor where pid=10
+            *
+ERROR at line 1:
+ORA-20006: deletion is not possible
+ORA-06512: at "ABHIJITH.T3", line 2
+ORA-04088: error during execution of trigger 'ABHIJITH.T3'
+
+
+
 
