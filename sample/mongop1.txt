@@ -1,0 +1,60 @@
+
+db.empDetails.insert([{name:"Bhuvan",age:30,email:"Bhuvan@gps.com",salary:5000}])
+
+db.empDetails.insert([{name:"Mohan",age:32,email:"mohan@gps.com",salary:5000}, {name:"Raju",age:29,email:"Raju@gps.com",salary:6000},{name:"Manu",age:29,email:"Manu@gps.com",salary:5500}])
+
+
+db.empDetails.insert([{name:"Manu",age:29,email:"Manu@gps.com",salary:5500}])
+
+db.empDetails.find().pretty();
+{
+        "_id" : ObjectId("64b0ef41d4374cb1eed8ed25"),
+        "name" : "Bhuvan",
+        "age" : 30,
+        "email" : "Bhuvan@gps.com",
+        "salary" : 5000
+}
+{
+        "_id" : ObjectId("64b0f020d4374cb1eed8ed26"),
+        "name" : "Mohan",
+        "age" : 32,
+        "email" : "mohan@gps.com",
+        "salary" : 5000
+}
+{
+        "_id" : ObjectId("64b0f020d4374cb1eed8ed27"),
+        "name" : "Raju",
+        "age" : 29,
+        "email" : "Raju@gps.com",
+        "salary" : 6000
+}
+{
+        "_id" : ObjectId("64b0f020d4374cb1eed8ed28"),
+        "name" : "Manu",
+        "age" : 29,
+        "email" : "Manu@gps.com",
+        "salary" : 5500
+}
+{
+        "_id" : ObjectId("64b0f0fdd4374cb1eed8ed29"),
+        "name" : "Manu",
+        "age" : 29,
+        "email" : "Manu@gps.com",
+        "salary" : 5500
+}
+
+
+
+> db.empDetails.findOne({name:"Mohan"})
+{
+        "_id" : ObjectId("64b0f020d4374cb1eed8ed26"),
+        "name" : "Mohan",
+        "age" : 32,
+        "email" : "mohan@gps.com",
+        "salary" : 5000
+}
+
+> db.empDetails.find({salary:{$gt:5000}})
+{ "_id" : ObjectId("64b0f020d4374cb1eed8ed27"), "name" : "Raju", "age" : 29, "email" : "Raju@gps.com", "salary" : 6000 }
+{ "_id" : ObjectId("64b0f0fdd4374cb1eed8ed29"), "name" : "Manu", "age" : 29, "email" : "Manu@gps.com", "salary" : 5500 }
+
